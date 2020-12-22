@@ -2,13 +2,17 @@ import React from 'react';
 import Chat from './components/Chat';
 import Nav from './components/Nav';
 import './App.css'; 
-
+import { BrowserRouter as Router, Route} from "react-router-dom"; 
+import Join from './components/Join';
 
 function App() {
   return (
     <>
-      <Nav/>
-      <Chat/>
+    {/* Routing here...  */}
+      <Router>
+        <Route exact path="/" component={Join}/>
+        <Route exact path="/chat" component={Chat}/>
+      </Router>
     </>
   );
 }
