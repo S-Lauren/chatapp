@@ -16,7 +16,14 @@ const Nav = () => {
   const css = useStyles(); 
   return (
     <div className={css.root}>
-        im a navbar
+        <ul>
+          <li>
+              Room Name
+          </li>
+          <li>
+              Historic
+          </li>
+        </ul>
     </div>
   );
 };
