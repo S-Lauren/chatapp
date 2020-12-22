@@ -1,7 +1,8 @@
 import React from 'react'; 
 import io from 'socket.io-client'; 
-import Chat from './Chat';
-
+import Chat from './components/Chat';
+import Nav from './components/Nav';
+import './App.css'; 
 let socket = io("http://localhost:5000/")
 
 socket.on("msg",() => {
@@ -10,10 +11,10 @@ socket.on("msg",() => {
 
 function App() {
   return (
-    <div>
-      hello React ! Glad to see you 
+    <>
+      <Nav/>
       <Chat/>
-    </div>
+    </>
   );
 }
 
