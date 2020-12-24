@@ -50,13 +50,16 @@ const useStyles = makeStyles({
 const Join = () => {
   const css = useStyles(); 
   const [username, setUsername] = useState(""); 
-  const [room, setRoom]= useState(""); 
+  const [room, setRoom]= useState(''); 
 
   return (
     <div className={css.container}>
       <form className={css.form}>
         <label className={css.label}> Enter a room id </label>
-        <input className={css.input} type="text" placeholder="your room id" value={room} onChange={(e) => setRoom(e.target.value)}/>
+        <select value={room} onChange={(e) => setRoom(e.target.value)}>
+          <option>1</option>
+          <option>2</option>
+        </select>
         <label className={css.label}> username  </label>
         <input className={css.input} type="text" placeholder="enter your username" value={username} onChange={(e) => setUsername(e.target.value)}/>
         <Link onClick={(e) => (!username || !room) ?  e.preventDefault() : null} to={`/chat?room=${room}&username=${username}`} >

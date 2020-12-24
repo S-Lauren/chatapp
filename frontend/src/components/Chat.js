@@ -39,7 +39,7 @@ const Chat = () => {
   const  queryString = new URLSearchParams(useLocation().search)
   const username = queryString.get("username"); 
   const room = queryString.get("room"); 
-  console.log(username, room)
+  console.log( room)
 
 
   const handleMsg = (e) => {
