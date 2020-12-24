@@ -8,20 +8,37 @@ const useStyles = makeStyles({
     height: '70px', 
     margin: '0', 
     padding: '0', 
-    color: 'white' 
-  }
+    color: 'white',
+    display: "flex",
+    alignItems: "center" 
+  },
+  nav: {
+    margin: "0",
+    listStyle: "none",
+    display: "flex",
+    alignItems: 'center'
+  },
+  menu: {
+    display: "flex",
+    alignItems: 'center',
+    marginLeft: "10px",
+    fontFamily: "Roboto",
+    '&:nth-child(2)': {
+      marginLeft: "50px"
+    }
+  } 
 })
 
-const Nav = () => {
+const Nav = ({room}) => {
   const css = useStyles(); 
   return (
     <div className={css.root}>
-        <ul>
-          <li>
-              Room Name
+        <ul className={css.nav}>
+          <li className={css.menu}>
+            #Room-{room}
           </li>
-          <li>
-              Historic
+          <li className={css.menu}>
+            Historic
           </li>
         </ul>
     </div>

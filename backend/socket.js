@@ -5,7 +5,7 @@
 
 module.exports = function(io) {
   io.on("connection", (socket) => {
-
+  // Join event et checking si la room existe en db. 
     socket.on("sendMessage", ({user, message}) => {
       io.emit("message", {user, message})
     })

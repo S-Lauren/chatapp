@@ -18,6 +18,10 @@ const useStyles = makeStyles({
   container: {
     marginTop: '20px', 
     marginLeft: "20px"
+  },
+  user: {
+    color: 'Black',
+    fontFamily: 'Roboto'
   }
 })
 
@@ -60,9 +64,16 @@ console.log(message)
 
   return (
     <>
-    <Nav/>
+    <Nav room={room}/>
     <div className={css.container}>
-      {list.map(x => <p>{x.user} {x.message}</p>)}
+      {list.map(x => {
+        return (
+        <>
+          <p className={css.user}>{x.user}</p>
+          <p> {x.message}</p>
+        </>
+        )}
+      )}
       <form onSubmit={handleMsg}>
         <input type="text" value={message} onChange={handleChange} />
         <button className={css.submit} type="submit" placeholder="Send your message ">Submit</button>
