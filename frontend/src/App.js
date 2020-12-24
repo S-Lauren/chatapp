@@ -1,6 +1,5 @@
 import React from 'react'; 
 import Chat from './components/Chat';
-import Nav from './components/Nav';
 import './App.css'; 
 import { BrowserRouter as Router, Route} from "react-router-dom"; 
 import Join from './components/Join';
