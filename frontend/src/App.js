@@ -10,7 +10,7 @@ function App() {
     {/* Routing here...  */}
       <Router>
         <Route exact path="/" component={Join}/>
-        <Route exact path="/chat" component={Chat}/>
+        <Route exact path="/chat/:room?/:username?" component={Chat}/>
       </Router>
     </>
   );

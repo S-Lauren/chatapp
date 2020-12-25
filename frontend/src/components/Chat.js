@@ -34,17 +34,16 @@ const Chat = () => {
   const css = useStyles()
   const [message, setMessage] = useState("");
   const [list, setList] = useState([]); 
-  const [user, setUser] = useState([]); 
+ 
   // URL Search params to get current user and room
   const  queryString = new URLSearchParams(useLocation().search)
   const username = queryString.get("username"); 
   const room = queryString.get("room"); 
-  console.log( room)
 
 
+  // Sur l'event sendMessage, j'envoie les variables username et messages pour définir les parametres
   const handleMsg = (e) => {
     e.preventDefault(); 
-    // Envois du/des msg de l'utilisateur vers le server socket. 
     socket.emit("sendMessage", {user: username, message: message})
     setMessage("")
   }
@@ -52,15 +51,14 @@ const Chat = () => {
   const handleChange = (e) => {
     setMessage(e.target.value)
   }
-  // Envois des messages sur l'event message sous parametre. 
+  // Sur l'event message, j'envoie les paramètres user et messages
   useEffect(() => {
     socket.on('message', ({user, message}) => {
       // update la liste de message courant. 
       setList( prev => [...prev, {user, message}])
     })
   },[])
-console.log(message)
-  console.log(list)
+
 
   return (
     <>
