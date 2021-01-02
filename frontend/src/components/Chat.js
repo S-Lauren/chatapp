@@ -44,7 +44,7 @@ const Chat = () => {
   // Sur l'event sendMessage, j'envoie les variables username et messages pour définir les parametres
   const handleMsg = (e) => {
     e.preventDefault(); 
-    socket.emit("sendMessage", {user: username, message: message, date: DateTime.local().toLocaleString(DateTime.DATETIME_MED)}) //=> '20 avril 2017 à 11:32 UTC−4'})
+    socket.emit("sendMessage", {user: username, message: message, date: new Date(), room: parseInt(room)}) //=> '20 avril 2017 à 11:32 UTC−4'})
     setMessage("")
   }
 
@@ -53,13 +53,14 @@ const Chat = () => {
   }
   // Sur l'event message, j'envoie les paramètres user et messages
   useEffect(() => {
-    socket.on('message', ({user, message, date}) => {
+    socket.on('message', ({user, message, date, room}) => {
       // push message into a list. 
-      setList( prev => [...prev, {user, message, date}])
+      setList( prev => [...prev, {user, message, date, room}])
     })
   },[])
 
 console.log(list)
+
   return (
     <>
     <Nav room={room}/>
@@ -67,7 +68,8 @@ console.log(list)
       {list.map(x => {
         return (
         <>
-          <p> {x.date}</p>
+        <p> {myDate}</p>
+          <p> {new Date(x.date).toLocaleString()}</p>
           <p className={css.user}>{x.user}</p>
           <p> {x.message}</p>
         </>
