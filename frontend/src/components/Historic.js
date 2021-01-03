@@ -48,6 +48,7 @@ const Historic = ({room}) => {
     .catch((error) => console.log('Fetch Error:', error))
   }, [])
 
+
   const lastMsg = lastMessage.flat(3); 
 
   return (

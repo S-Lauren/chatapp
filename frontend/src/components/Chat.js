@@ -89,11 +89,10 @@ const Chat = () => {
   useEffect(() => {
     socket.on('message', ({user, message, date, room}) => {
       // push message into a list. 
-      setList( prev => [...prev, {user, message, date, room}])
+    setList( prev => [...prev, {user, message, date, room}])
     })
   },[])
 
-console.log(list)
 
   return (
     <>
@@ -105,7 +104,6 @@ console.log(list)
       {list.map(x => {
         return (
         <>
-
           <p className={css.user}>{x.user}
           <em className={css.date}>{new Date(x.date).toLocaleString(DateTime.DATETIME_MED)}</em>
           </p>
@@ -119,7 +117,7 @@ console.log(list)
           <input className={css.input} type="text" value={message} onChange={handleChange} />
           <button className={css.submit} type="submit" placeholder="Send your message ">Submit</button>
         </form>
-        </div>
+      </div>
     </>
   );
 };
