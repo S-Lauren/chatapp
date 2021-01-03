@@ -61,6 +61,9 @@ const Join = () => {
     .catch((error) => console.log('Fetch Error:', error))
   }, []); 
   
+// function fire onChange 
+
+
   // flatten the array of room from db
   const arr = test.flat(3);
   const roomName =  arr.map(x => x.name)
@@ -69,7 +72,8 @@ console.log(roomName)
     <div className={css.container}>
       <form className={css.form}>
         <label className={css.label}> Enter a room id </label>
-        <select value={room} onChange={(e) => setRoom(e.target.value)}>
+        <select onChange={(e) => setRoom(e.target.value)}>
+          <option selected="selected"></option>
           {arr.map(x => <option value={x.id}>{x.name}</option>)}
         </select>
         <label className={css.label}> username  </label>

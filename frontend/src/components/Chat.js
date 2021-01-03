@@ -68,7 +68,6 @@ console.log(list)
       {list.map(x => {
         return (
         <>
-        <p> {myDate}</p>
           <p> {new Date(x.date).toLocaleString()}</p>
           <p className={css.user}>{x.user}</p>
           <p> {x.message}</p>
