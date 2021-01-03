@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Nav from './Nav';
 import { useLocation } from 'react-router-dom';
 import { DateTime } from 'luxon';
+import Historic from './Historic';
 let socket = io("http://localhost:5000/"); 
 
 const useStyles = makeStyles({
@@ -64,6 +65,7 @@ console.log(list)
   return (
     <>
     <Nav room={room}/>
+    <Historic room={room}/>
     <div className={css.container}>
       {list.map(x => {
         return (
