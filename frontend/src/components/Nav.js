@@ -37,9 +37,6 @@ const Nav = ({room}) => {
           <li className={css.menu}>
             #Room-{room}
           </li>
-          <li className={css.menu}>
-            Historic
-          </li>
         </ul>
     </div>
   );

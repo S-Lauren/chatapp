@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Nav from './Nav';
 import { useLocation } from 'react-router-dom';
 import { DateTime } from 'luxon';
-import Historic from './Historic';
+import Historic, { generateRandomColor } from './Historic';
 let socket = io("http://localhost:5000/"); 
 
 const useStyles = makeStyles({
@@ -17,12 +17,45 @@ const useStyles = makeStyles({
     marginLeft: '10px'
   }, 
   container: {
-    marginTop: '20px', 
-    marginLeft: "20px"
+    backgroundColor: '#444444',
+    paddingLeft: '20px',
+    marginTop: '0'
   },
   user: {
-    color: 'Black',
-    fontFamily: 'Roboto'
+    color: generateRandomColor(),
+    fontFamily: 'Roboto',
+    fontWeight: "900", 
+    fontSize: '20px',
+    margin: '0'
+  },
+  chatBody: {
+    backgroundColor: '#444444', 
+    width: '100%',
+    height: '100vh'
+  },
+  date:    {
+    fontSize: "10px",
+    marginLeft: '10px'
+  },
+  message: {
+    fontFamily: 'Roboto', 
+    color: 'white',
+    margin: '0',
+    paddingTop: '10px',
+    paddingBottom: '15px'
+  },
+  form: {
+    width: '100%',
+    color: 'black',
+    background: 'black',
+    height: '50px',
+    display: 'flex',
+    justifyContent: 'left',
+    alignItems: 'center'
+  },
+  input: {
+    width: "40vw",
+    marginLeft: '20px'
   }
 })
 
@@ -65,22 +98,28 @@ console.log(list)
   return (
     <>
     <Nav room={room}/>
-    <Historic room={room}/>
+    <div className={css.chatBody}>
+      <Historic room={room}/>
+    </div>
     <div className={css.container}>
       {list.map(x => {
         return (
         <>
-          <p> {new Date(x.date).toLocaleString()}</p>
-          <p className={css.user}>{x.user}</p>
-          <p> {x.message}</p>
+
+          <p className={css.user}>{x.user}
+          <em className={css.date}>{new Date(x.date).toLocaleString(DateTime.DATETIME_MED)}</em>
+          </p>
+          <p className={css.message}> {x.message}</p>
         </>
         )}
       )}
-      <form onSubmit={handleMsg}>
-        <input type="text" value={message} onChange={handleChange} />
-        <button className={css.submit} type="submit" placeholder="Send your message ">Submit</button>
-      </form>
-    </div>
+      </div>
+      <div className={css.form}>
+        <form onSubmit={handleMsg}>
+          <input className={css.input} type="text" value={message} onChange={handleChange} />
+          <button className={css.submit} type="submit" placeholder="Send your message ">Submit</button>
+        </form>
+        </div>
     </>
   );
 };

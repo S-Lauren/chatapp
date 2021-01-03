@@ -15,7 +15,6 @@ const useStyles = makeStyles({
   form: {
     display: 'flex', 
     flexDirection: "column", 
-
   }, 
   label: {
     fontFamily: "Roboto", 
@@ -60,14 +59,11 @@ const Join = () => {
     .then((data) => setTest(prev => [...prev, data]))
     .catch((error) => console.log('Fetch Error:', error))
   }, []); 
-  
-// function fire onChange 
-
 
   // flatten the array of room from db
   const arr = test.flat(3);
   const roomName =  arr.map(x => x.name)
-console.log(roomName)
+
   return (
     <div className={css.container}>
       <form className={css.form}>
