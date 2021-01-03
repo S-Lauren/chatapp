@@ -18,7 +18,7 @@ module.exports =  class Room {
   }
   /* GET rooms/1/lastMessages */ 
   static lastMessages(id) {
-    return dbConnect.execute("SELECT content, username, date FROM message WHERE roomId=? ORDER BY date ASC LIMIT 10", [id])
+    return dbConnect.execute("SELECT content, username, date FROM message WHERE roomId=? ORDER BY date DESC LIMIT 10", [id])
   }
 
 
