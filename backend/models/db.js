@@ -3,7 +3,7 @@
 const mysql = require("mysql2");
 const dbConfig = require("../config/db.config.json");
 
-const pool = mysql.createPool({
+const pool = mysql.createConnection({
   host: dbConfig.HOST,
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
@@ -19,5 +19,4 @@ pool.query("SELECT * FROM room", (err, result, fields) => {
     console.log(result)
   }
 })
-
-module.exports = pool.promise();
+module.exports = pool; 

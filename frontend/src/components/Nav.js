@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Historic from './Historic';
-import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
   root: {
@@ -38,10 +37,7 @@ const Nav = ({room}) => {
         <ul className={css.nav}>
           <li className={css.menu}>
             #Room-{room}
-          </li>
-          
-            <li className={css.menu}>Historic</li>
- 
+          </li> 
         </ul>
     </div>
   );

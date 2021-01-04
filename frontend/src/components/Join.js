@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import socket from '../utils/ioSocket'; 
 
 
 const useStyles = makeStyles({
@@ -49,20 +50,19 @@ const Join = () => {
   const css = useStyles(); 
   const [username, setUsername] = useState(""); 
   const [room, setRoom]= useState(''); 
-  const [test, setTest]= useState([]); 
+  const [listRoom, setListRoom]= useState([]); 
 
-// Fetch API call allRooms 
 
-  useEffect(() => {
-    fetch('http://localhost:5000/rooms')
-    .then((response) => response.json())
-    .then((data) => setTest(prev => [...prev, data]))
-    .catch((error) => console.log('Fetch Error:', error))
-  }, []); 
+  useEffect(()=> {
+    socket.on('sendRoom', (room) => {
+      setListRoom(prev => [...prev, room])
+    })
+  },[])
+ 
 
-  // flatten the array of room from db
-  const arr = test.flat(3);
-  const roomName =  arr.map(x => x.name)
+  /* flatten the array of room from db at 3 levels */
+
+  const arr = listRoom.flat(3);
 
   return (
     <div className={css.container}>
