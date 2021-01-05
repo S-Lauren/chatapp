@@ -59,6 +59,11 @@ const Join = () => {
     })
   },[])
  
+  /* Sending the room chosen to event joinRoom */
+
+  const sendCurrentRoom = () => {
+    socket.emit("joinRoom", parseInt(room))
+  }
 
   /* flatten the array of room from db at 3 levels */
 
@@ -76,7 +81,7 @@ const Join = () => {
         <input className={css.input} type="text" placeholder="enter your username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
         <Link onClick={(e) => (!username || !room) ?  e.preventDefault() : null} 
         to={`/chat?room=${room}&username=${username}`} >
-          <button className={css.btn} type="submit">Connection</button>
+          <button onClick={sendCurrentRoom} className={css.btn} type="submit">Connection</button>
         </Link>
       </form>
     </div>

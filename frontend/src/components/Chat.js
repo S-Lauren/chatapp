@@ -76,10 +76,12 @@ const Chat = () => {
   
 
   /* On SendMessage event, I send from client => username, message content from input, date and the room from queryString */
-
+  /* I have to emit a second time the room to refetch the list after sending a message !*/
+  
   const handleMsg = (e) => {
     e.preventDefault(); 
     socket.emit("sendMessage", {user: username, message: message, date: new Date(), room: parseInt(room)}) 
+    socket.emit("joinRoom", parseInt(room))
     setMessage("")
   }
 
@@ -95,26 +97,26 @@ const Chat = () => {
     socket.on('sendMsg', (message) => {
       setList([...message])
     })
-  },[list])
+  },[room, list])
 
   const newList = list.flat(3)
 
   return (
     <>
-    <Nav room={room}/>
-    <div className={css.chatBody}>
-    <div className={css.container}>
-      {newList.map(x => {
-        return (
-        <>
-          <p className={css.user}>{x.username}
-          <em className={css.date}>{new Date(x.date).toLocaleString(DateTime.DATETIME_MED)}</em>
-          </p>
-          <p className={css.message}> {x.content}</p>
-        </>
-        )}
-      )}
-      </div>
+      <Nav room={room}/>
+      <div className={css.chatBody}>
+        <div className={css.container}>
+          {newList.map(x => {
+            return (
+            <>
+              <p className={css.user}>{x.username}
+              <em className={css.date}>{new Date(x.date).toLocaleString(DateTime.DATETIME_MED)}</em>
+              </p>
+              <p className={css.message}> {x.content}</p>
+            </>
+            )}
+          )}
+        </div>
       </div>
       <div className={css.form}>
         <form onSubmit={handleMsg}>
