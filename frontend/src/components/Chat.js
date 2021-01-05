@@ -97,7 +97,11 @@ const Chat = () => {
     socket.on('sendMsg', (message) => {
       setList([...message])
     })
-  },[room, list])
+  },[list])
+
+  useEffect(() => {
+    socket.emit("joinRoom", parseInt(room))
+  }, [room])
 
   const newList = list.flat(3)
 

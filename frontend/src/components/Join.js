@@ -81,7 +81,7 @@ const Join = () => {
         <input className={css.input} type="text" placeholder="enter your username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
         <Link onClick={(e) => (!username || !room) ?  e.preventDefault() : null} 
         to={`/chat?room=${room}&username=${username}`} >
-          <button onClick={sendCurrentRoom} className={css.btn} type="submit">Connection</button>
+          <button  className={css.btn} type="submit">Connection</button>
         </Link>
       </form>
     </div>
