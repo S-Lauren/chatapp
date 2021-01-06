@@ -1,14 +1,14 @@
-# chatapp
+# **Chatapp** 
 
 Chat app is made with Node.js + Express and Socket.io
 frontend with React.js
 
-# Install the project Chat
+# **Install the project Chat**
 
 Run the command to install dependencies : yarn install
 You have to yarn install one the frontend directory and on the backend directory (cd frontend + yarn install and cd backend + yarn install).
 
-# Make your .ENV ! 
+# **Make your .ENV !** 
 
 - cd backend and touch .env
 
@@ -21,18 +21,18 @@ DB_PASSWORD= your db password
 DB_NAME= your db name
 
 
-# Request for your DATABASE
+# **Request for your DATABASE**
 
-create DATABASE nameDB;
+- create DATABASE nameDB;
 
-create table room ( id INT PRIMARY KEY AUTO_INCREMENT not null, name varchar(100) not null );
+- create table room ( id INT PRIMARY KEY AUTO_INCREMENT not null, name varchar(100) not null );
 
-create table message ( id INT PRIMARY KEY AUTO_INCREMENT not null, content VARCHAR(255), username VARCHAR(255), userId VARCHAR(40), date DATE, roomId INT, FOREIGN KEY (roomId) REFERENCES room(id) ON DELETE CASCADE);
+- create table message ( id INT PRIMARY KEY AUTO_INCREMENT not null, content VARCHAR(255), username VARCHAR(255), userId VARCHAR(40), date DATE, roomId INT, FOREIGN KEY (roomId) REFERENCES room(id) ON DELETE CASCADE);
 
-- Create 2 rooms to test
+**Create 2 initial rooms**
 
-INSERT INTO room (id, name) VALUES(1, "Breaking Bad"); 
-INSERT INTO room (id, name) VALUES(1, "Game of Thrones"); 
+- INSERT INTO room (id, name) VALUES(1, "Breaking Bad"); 
+- INSERT INTO room (id, name) VALUES(1, "Game of Thrones"); 
 
 # Start the project
 
@@ -42,6 +42,6 @@ cd frontend + yarn start for starting the project.
 
 # Nice to have if I miss it
 
-- Number of users in a room
+- Number of users in a room :white_check_mark:
 - Checking if user have same name in same room (forbidden)
 - Other optional bonus I didnt have time to perform. 
