@@ -15,6 +15,7 @@ module.exports = function(io) {
 
     socket.on("joinRoom", (room) => {
         socket.join(`${room}`);
+        // console.log( Object.keys(io.sockets.in(`${room}`).connected).length)
         connection.query(`SELECT * FROM message WHERE roomId=${room} ORDER BY date DESC LIMIT 10`, function(err, results, rows) {
         io.in(`${room}`).emit("sendMsg", results)
       })
