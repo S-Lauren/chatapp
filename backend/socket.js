@@ -1,6 +1,7 @@
 
 const connection = require("./models/db")
 
+const numClients = {}; 
 
 module.exports = function(io) {
 
@@ -15,7 +16,16 @@ module.exports = function(io) {
 
     socket.on("joinRoom", (room) => {
         socket.join(`${room}`);
-        // console.log( Object.keys(io.sockets.in(`${room}`).connected).length)
+        socket.room = room; 
+      
+       /* Track number of user connected */ 
+        if (typeof  numClients[room]  === 'undefined')  {
+          numClients[room] = 1;
+        } else {
+          numClients[room]++;
+        }
+ 
+        io.in(`${room}`).emit("getNumOfClient", numClients)
         connection.query(`SELECT * FROM message WHERE roomId=${room} ORDER BY date DESC LIMIT 10`, function(err, results, rows) {
         io.in(`${room}`).emit("sendMsg", results)
       })
@@ -28,6 +38,8 @@ module.exports = function(io) {
     })
 
     socket.on('disconnect', () => {
+      numClients[socket.room]--;
+      io.emit("updateNumber", numClients)
       io.emit("message", "a user has leaved")
     })
   })
