@@ -39,18 +39,24 @@ const Nav = ({room}) => {
 
 const [numUser, setNumUser] = useState([])
 
+
+
   useEffect(() => {
     socket.on("getNumOfClient", (num) =>  {
       console.log(num)
       setNumUser(num)
     })
-  }, [numUser])
+  }, [])
 
   useEffect(() => {
     socket.on("updateNumber", (num) => {
       setNumUser(num)
     })
-  }, [numUser])
+  }, [])
+
+  useEffect(() => {
+    socket.emit("retrieveNumClient", parseInt(room))
+  }, [])
 
 console.log(numUser[room])
   const css = useStyles(); 

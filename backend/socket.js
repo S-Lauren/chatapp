@@ -13,28 +13,28 @@ module.exports = function(io) {
      })
 
     /* Event joinRoom for retrieve the roomId and only display message of the current room  */ 
-
-    socket.on("joinRoom", (room) => {
-        socket.join(`${room}`);
-        socket.room = room; 
-      
-       /* Track number of user connected */ 
-        if (typeof  numClients[room]  === 'undefined')  {
-          numClients[room] = 1;
-        } else {
-          numClients[room]++;
-        }
- 
-        io.in(`${room}`).emit("getNumOfClient", numClients)
+    socket.on("joinRoom", (room) => { 
         connection.query(`SELECT * FROM message WHERE roomId=${room} ORDER BY date DESC LIMIT 10`, function(err, results, rows) {
         io.in(`${room}`).emit("sendMsg", results)
       })
     })
 
+   /* Send number of user in a given room */
+    socket.on('retrieveNumClient', (room) => {
+      socket.room = room; 
+      socket.join(`${room}`);
+      (typeof  numClients[room]  === 'undefined') ? numClients[room] = 1 :    numClients[room]++;
+        io.to(`${room}`).emit("getNumOfClient", numClients)
+    })
+
     /* Direct messages send into DB in real time */
     socket.on("sendMessage", ({user, message, date, room}) => {
-      connection.query(`INSERT INTO message(content,userId,username,date,roomId) 
-       VALUES("${message}","${socket.id}","${user}","${date}", "${room}")`)
+      if(message === "") {
+          return 'No empty messages allowed'
+      } else {
+        connection.query(`INSERT INTO message(content,userId,username,date,roomId) 
+        VALUES("${message}","${socket.id}","${user}","${date}", "${room}")`)
+      }    
     })
 
     socket.on('disconnect', () => {
