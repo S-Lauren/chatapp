@@ -32,7 +32,7 @@ DB_NAME= your db name
 **Create 2 initial rooms**
 
 - INSERT INTO room (id, name) VALUES(1, "Breaking Bad"); 
-- INSERT INTO room (id, name) VALUES(1, "Game of Thrones"); 
+- INSERT INTO room (id, name) VALUES(2, "Game of Thrones"); 
 
 # Start the project
 
